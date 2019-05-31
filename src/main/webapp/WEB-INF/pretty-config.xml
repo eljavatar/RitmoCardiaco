@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretty-config
+	xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+                      
+
+<!--    <url-mapping id="login">
+        <pattern value="/app/login" />
+        <view-id value="/faces/login.xhtml" />
+    </url-mapping>-->
+    
+<!--    <url-mapping id="403">
+        <pattern value="/app/403" />
+        <view-id value="/faces/403.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="404">
+        <pattern value="/app/404" />
+        <view-id value="/faces/404.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="500">
+        <pattern value="/app/500" />
+        <view-id value="/faces/500.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="expired">
+        <pattern value="/app/expired" />
+        <view-id value="/faces/expired.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="optimistic">
+        <pattern value="/app/optimistic" />
+        <view-id value="/faces/optimistic.xhtml" />
+    </url-mapping>-->
+
+</pretty-config>

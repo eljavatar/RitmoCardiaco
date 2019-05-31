@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/facelets/templates/templateAnonymous.xhtml">
+
+    <ui:define name="title">
+        #{i18n.label_404_header}
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="error-page">
+            <h2 class="headline text-yellow">#{i18n.label_404_header}</h2>
+
+            <div class="error-content" style="font-size: 1.1em">
+                <h3><i class="fa fa-warning text-yellow"></i> #{i18n.label_404_message}.</h3>
+
+                <p>
+                    #{i18n.label_go_back} <p:link style="text-decoration: underline" href="/app/index" value="Home"
+                            escape="false"/>.
+                </p>
+
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

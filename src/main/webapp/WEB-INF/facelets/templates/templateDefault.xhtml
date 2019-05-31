@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+        <h:outputStylesheet library="bootstrap" name="css/bootstrap.min.css" />
+        <h:outputStylesheet library="bootstrap" name="css/bootstrap-theme.min.css" />
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <h:outputScript library="js" name="main.js" />
+        <h:outputScript library="js" name="calendar.locale_ES.js" />
+        
+        <title><ui:insert name="title" /></title>
+    </h:head>
+    
+    <ui:insert name="metadata" />
+
+    <h:body id="container" class="container">
+
+        <!--<p:outputPanel>-->
+            <p:ajaxStatus onstart="showStatusDialog();" onsuccess="hideStatusDialog();" />
+            
+            <p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+                closable="false" resizable="false" responsive="true" 
+                showHeader="false" style="z-index: 9999 !important; position: fixed">
+                <p:graphicImage library="img" name="ajaxloading1.gif" />
+            </p:dialog>
+            
+            
+            <div id="top" class="row">
+                <div class="top_left ui-g-6">
+                    <div class="content_top_left">
+                        <h:outputLabel value=" Ritmo Cardiaco" styleClass="fa fa-heart" style="font-size: 44px" />
+                    </div>
+                </div>
+                <div class="top_right">
+                    <div class="content_top_right">
+                        <h:outputLabel value="#{usuarioAplicacion.username}" />
+                    </div>
+                    <div class="content_top_right">
+                        <h:form id="formLogout">
+                            
+                            <p:link href="/app/logout" title="Cerrar Sesión" style="font-size: 25px">
+                                <i class="icon fa fa-sign-out" />
+                            </p:link>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="middle" class="row">
+                <!--<div id="left">-->
+                <div id="sidebar">
+                    
+                    <div class="toggle-btn" onclick="toggleSidebar()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    
+                    <ui:include src="menu.xhtml"/>
+                    <!--https://www.adictosaltrabajo.com/tutoriales/jsf-2-facelets-templates-and-composite-components/-->
+                    <!--https://www.oscarblancarteblog.com/2016/10/26/entitymanager-archivo-persistence-xml/-->
+                    <!--https://netbeans.org/kb/docs/javaee/maven-entapp.html-->
+                    <!--http://codigoxules.org/creando-servicios-web-restful-java-con-postgresql-en-netbeans/-->
+                    <!--http://blog.hatemalimam.com/jsf-and-twitter-bootstrap-integration/-->
+                    <!--https://www.bootsfaces.net/-->
+                </div>
+
+                <div id="center">
+                    <ui:insert name="content">Content</ui:insert>
+                </div>
+            </div>
+
+            <h:outputScript library="bootstrap" name="js/bootstrap.min.js" />
+
+            <p:growl id="messages" autoUpdate="true" sticky="true" />
+
+            <script>
+                // timer
+                 var statusDlgTimer = null;
+
+                // show delayed dialog
+                function showStatusDialog() {
+                    if (statusDlgTimer === null)
+                        statusDlgTimer = setTimeout("PF('statusDialog').show()", 500);
+                }
+
+                // hide dialog / cancel timer
+                function hideStatusDialog() {
+                    if (statusDlgTimer !== null) {
+                        clearTimeout(statusDlgTimer);
+                        PF('statusDialog').hide();
+                        statusDlgTimer = null;
+                    }
+                }
+                
+                function toggleSidebar() {
+                    document.getElementById("sidebar").classList.toggle('active');
+                    document.getElementById("center").classList.toggle('active');
+                }
+            </script>
+        
+        <!--</p:outputPanel>-->
+    </h:body>
+
+</html>

@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+        <composite:interface>
+            <composite:attribute name="controller" type="com.eljavatar.renterp.app.view.controller.AbstractComponentsController" required="true" />
+            <!--<composite:attribute name="trajeSeleccionado" type="com.eljavatar.renterp.app.model.maestros.Traje" required="true" />-->
+            <composite:attribute name="componentUpdate" required="true" />
+        </composite:interface>
+
+        <composite:implementation>
+
+            <h:form id="formBuscarTraje">
+                <p:dialog id="dialogBuscarTraje" widgetVar="dialogBuscarTraje"
+                          closable="false" closeOnEscape="false" modal="true"
+                          dynamic="true" width="920px" resizable="false">
+                    <f:facet name="header">
+                        #{i18n.buscar_traje_title_dialog_buscar_traje}
+                    </f:facet>
+                    
+
+                    <p:outputPanel id="panelFiltrosBuscarTraje" style="margin-bottom: 10px;">
+                        <div class="ui-g">
+                            <div class="ui-g-6 ui-g-nopad">
+                                <div class="ui-g-3 text-right"><p:outputLabel value="#{i18n.buscar_traje_form_categoria}:" /></div>
+                                <div class="ui-g-9">
+                                    <p:autoComplete id="filtroCategoriaTraje" dropdown="true" value="#{busquedaTrajesController.filtroBusquedaTrajeDto.categoria}" 
+                                                    completeMethod="#{busquedaTrajesController.completeCategoria}" var="cat" 
+                                                    itemLabel="#{cat.descripcion}" itemValue="#{cat}" 
+                                                    emptyMessage="#{i18n.buscar_traje_empty_no_hay_categorias}" 
+                                                    placeholder="#{i18n.buscar_traje_placeholder_categoria}" 
+                                                    converter="parqerp.SelectedItemsConverter" style="width: 100% !important">
+                                        <p:ajax event="itemSelect" listener="#{trajeController.onCategoriaTrajeSelected}" update="filtroSubcategoriaTraje" />
+                                    </p:autoComplete>
+                                </div>
+                            </div>
+                            <div class="ui-g-6 ui-g-nopad">
+                                <div class="ui-g-3 text-right"><p:outputLabel value="#{i18n.buscar_traje_form_subcategoria}:" /></div>
+                                <div class="ui-g-9">
+                                    <p:autoComplete id="filtroSubcategoriaTraje" dropdown="true" value="#{busquedaTrajesController.filtroBusquedaTrajeDto.subcategoria}" 
+                                                    completeMethod="#{busquedaTrajesController.completeSubCategoria}" var="sub" 
+                                                    itemLabel="#{sub.descripcion}" itemValue="#{sub}" 
+                                                    emptyMessage="#{i18n.buscar_traje_empty_no_hay_subcategorias}" 
+                                                    placeholder="#{i18n.buscar_traje_placeholder_subcategoria}" 
+                                                    converter="parqerp.SelectedItemsConverter" style="width: 100% !important">
+                                    </p:autoComplete>
+                                </div>
+                            </div>
+
+                            <div class="ui-g-6 ui-g-nopad">
+                                <div class="ui-g-3 text-right"><p:outputLabel value="#{i18n.buscar_traje_form_codigo}:" /></div>
+                                <div class="ui-g-9">
+                                    <p:inputText id="filtroCodigoTraje" value="#{busquedaTrajesController.filtroBusquedaTrajeDto.codigo}" placeholder="#{i18n.buscar_traje_placeholder_codigo}" styleClass="anchoInput" />
+                                </div>
+                            </div>
+                            <div class="ui-g-6 ui-g-nopad">
+                                <div class="ui-g-3 text-right"><p:outputLabel value="#{i18n.buscar_traje_form_descripcion}:" /></div>
+                                <div class="ui-g-9">
+                                    <p:inputText id="filtroDescripcionTraje" value="#{busquedaTrajesController.filtroBusquedaTrajeDto.descripcion}" placeholder="#{i18n.buscar_traje_placeholder_descripcion}" styleClass="anchoInput" />
+                                </div>
+                            </div>
+
+                            <div class="ui-g-12 ui-g-nopad text-right" style="margin-top: 10px;">
+                                <p:commandButton value="#{i18n.buscar_traje_boton_buscar}" actionListener="#{busquedaTrajesController.buscarTraje()}" icon="fa fa-fw fa-search" styleClass="aqua-button remove-outline" />
+                                <p:spacer width="5" />
+                                <p:commandButton value="#{i18n.buscar_traje_boton_limpiar}" actionListener="#{busquedaTrajesController.limpiarFormulario()}" icon="fa fa-fw fa-eraser" styleClass="orange-button remove-outline" />
+                                <p:spacer width="5" />
+                                <p:commandButton value="#{i18n.buscar_traje_boton_cancelar}" actionListener="#{busquedaTrajesController.cancelarBusqueda()}" icon="fa fa-fw fa-close" styleClass="red-button remove-outline" />
+                            </div>
+                        </div>
+                    </p:outputPanel>
+
+                    <p:outputPanel id="panelResultadoBusquedaTrajes">
+                        <p:dataTable id="tableBusquedaTrajes" widgetVar="tableBusquedaTrajes"
+                                     value="#{busquedaTrajesController.listBusquedaTrajes}"
+                                     var="traje" paginator="true" rows="10" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     currentPageReportTemplate="({startRecord} - {endRecord} #{i18n.de} {totalRecords})"
+                                     rowsPerPageTemplate="10, 15, 20" selectionMode="single" rowKey="#{traje.id}"
+                                     emptyMessage="#{i18n.datatable_sin_registros}" scrollable="true" scrollWidth="inherit">
+
+                            <p:column headerText="#{i18n.buscar_traje_form_categoria}" style="width: 20%;">
+                                <h:outputText value="#{traje.subcategoriaTraje.categoriaTrajes.descripcion}" />
+                            </p:column>
+
+                            <p:column headerText="#{i18n.buscar_traje_form_subcategoria}" style="width: 20%;">
+                                <h:outputText value="#{traje.subcategoriaTraje.descripcion}" />
+                            </p:column>
+
+                            <p:column headerText="#{i18n.buscar_cliente_form_nombres}">
+                                <h:outputText value="#{traje.descripcion}" />
+                            </p:column>
+
+                            <p:column headerText="#{i18n.buscar_traje_form_unidades_stock}" style="width: 80px; text-align: center;">
+                                <h:outputText value="#{traje.unidadesStock}" />
+                            </p:column>
+                            
+                            <p:column headerText="#{i18n.buscar_traje_form_valor_unitario}" style="width: 100px;">
+                                <h:outputText value="#{traje.precioAlquiler}">
+                                    <f:convertNumber type="currency" currencySymbol="$" pattern="$ #,###" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="#{i18n.form_acciones}" style="width: 80px; text-align: center;">
+                                <p:commandButton title="#{i18n.buscar_traje_boton_seleccionar}" icon="fa fa-fw fa-check-circle-o" styleClass="green-button remove-outline" actionListener="#{cc.attrs.controller.seleccionarTraje(traje)}" update="#{cc.attrs.componentUpdate}" oncomplete="PF('dialogBuscarTraje').hide()" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:outputPanel>
+
+
+                </p:dialog>
+            </h:form>
+
+        </composite:implementation>
+
+    </h:body>
+
+</html>

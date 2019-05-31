@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="ritmoCardiacoDS" transaction-type="JTA">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <!--<jar-file>Model-Common-1.0-SNAPSHOT.jar</jar-file>-->
+    <!--<exclude-unlisted-classes>false</exclude-unlisted-classes>-->
+    <jta-data-source>java:/jboss/ritmoCardiacoDS</jta-data-source>
+    <properties>
+      <!--<property name="javax.persistence.schema-generation.database.action" value="create"/>-->
+      <property name="hibernate.archive.autodetection" value="class"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
+      <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+      <!--<property name="hibernate.use_sql_comments" value="true"/>-->
+      <!--<property name="hibernate.transaction.flush_before_completion" value="true"/>-->
+    </properties>
+  </persistence-unit>
+</persistence>

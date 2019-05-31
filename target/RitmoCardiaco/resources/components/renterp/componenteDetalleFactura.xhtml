@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+
+        <composite:interface>
+            <composite:attribute name="controller" type="com.eljavatar.renterp.app.view.controller.AbstractComponentsController" required="true" />
+            <composite:attribute name="listDetalleFactura" type="java.util.List" required="true" />
+        </composite:interface>
+
+        <composite:implementation>
+
+            <h:form id="formAgregarToDetalle">
+                <p:commandButton id="botonAgregarAccesorio" value="#{i18n.detalle_factura_boton_agregar_accesorio_traje}" actionListener="#{cc.attrs.controller.abrirDialogAgregarAccesorio(true)}" icon="fa fa-fw fa-plus" styleClass="aqua-button remove-outline" rendered="#{serviciosController.tienePermisos(PermisoEnum.MODIFICAR_CLIENTES)}" />
+                <p:spacer width="5" />
+                <p:commandButton id="botonAgregarTraje" value="#{i18n.detalle_factura_boton_agregar_traje}" actionListener="#{cc.attrs.controller.abrirDialogAgregarTraje()}" icon="fa fa-fw fa-plus" styleClass="aqua-button remove-outline" rendered="#{serviciosController.tienePermisos(PermisoEnum.MODIFICAR_CLIENTES)}" />
+            </h:form>
+
+            <h:form id="formAgregarAccesorio">
+                <p:remoteCommand name="abrirDialogBuscarTraje" actionListener="#{busquedaTrajesController.abrirDialogBuscarTraje()}" process="@this" />
+
+                <p:dialog id="dialogAgregarAccesorio" widgetVar="dialogAgregarAccesorio"
+                          closable="false" closeOnEscape="false" modal="true"
+                          dynamic="true" width="700px" resizable="false">
+                    <f:facet name="header">
+                        #{cc.attrs.controller.titleDialogAccesorio}
+                    </f:facet>
+
+                    <div class="ui-g">
+                        <div class="ui-g-6"><p:outputLabel value="#{i18n.detalle_factura_form_accesorio}:" for="accesorioTraje" /></div>
+                        <div class="ui-g-2"><p:outputLabel value="#{i18n.detalle_factura_form_cantidad}:" for="cantidadAccesorio" /></div>
+                        <div class="ui-g-4"></div>
+                    </div>
+
+                    <div class="ui-g">
+                        <div class="ui-g-6 ui-g-nopad">
+                            <p:outputPanel class="ui-g-10" rendered="#{!cc.attrs.controller.estaModificandoAccesorio}">
+                                <p:inputText id="accesorioTraje" value="#{cc.attrs.controller.trajeSeleccionado.descripcion}" styleClass="anchoInput" placeholder="#{i18n.detalle_factura_placeholder_accesorio}" onclick="abrirDialogBuscarTraje()" required="true" requiredMessage="#{i18n.detalle_factura_mensaje_error_accesorio_requerido}" />
+                            </p:outputPanel>
+                            <p:outputPanel class="ui-g-2" rendered="#{!cc.attrs.controller.estaModificandoAccesorio}">
+                                <p:commandButton id="botonBuscarAccesorio" actionListener="#{busquedaTrajesController.abrirDialogBuscarTraje()}" title="#{i18n.detalle_factura_boton_buscar_accesorio}" icon="fa fa-fw fa-search" styleClass="aqua-button remove-outline" process="@this" />
+                            </p:outputPanel>
+                            <p:outputPanel class="ui-g-12" rendered="#{cc.attrs.controller.estaModificandoAccesorio}">
+                                <h:outputText value="#{cc.attrs.controller.trajeSeleccionado.descripcion}" />
+                            </p:outputPanel>
+                        </div>
+                        <div class="ui-g-2">
+                            <p:inputNumber id="cantidadAccesorio" value="#{cc.attrs.controller.cantidadAccesorio}" styleClass="anchoInputNumber" padControl="false" decimalPlaces="0" minValue="0" emptyValue="empty" placeholder="#{i18n.detalle_factura_placeholder_cantidad}" required="true" requiredMessage="#{i18n.detalle_factura_mensaje_error_cantidad_requerido}" />
+                        </div>
+                        <div class="ui-g-4">
+                            <p:commandButton value="#{i18n.detalle_factura_boton_agregar_accesorio}" actionListener="#{cc.attrs.controller.agregarAccesorioTraje()}" icon="fa fa-fw fa-check-circle-o" styleClass="green-button remove-outline" rendered="#{!cc.attrs.controller.estaModificandoAccesorio}" />
+                            <p:commandButton value="#{i18n.detalle_factura_boton_modificar_accesorio}" actionListener="#{cc.attrs.controller.modificarAccesorioTraje()}" icon="fa fa-fw fa-refresh" styleClass="navy-button remove-outline" rendered="#{cc.attrs.controller.estaModificandoAccesorio}" />
+                            <p:spacer width="5" />
+                            <p:commandButton value="#{i18n.detalle_factura_boton_cancelar_accesorio}" actionListener="#{cc.attrs.controller.cerrarDialogAgregarAccesorio()}" icon="fa fa-fw fa-close" styleClass="red-button remove-outline" process="@this" />
+                        </div>
+                    </div>
+                </p:dialog>
+            </h:form>
+
+
+            <h:form id="formAgregarTraje">
+                <p:dialog id="dialogAgregarTraje" widgetVar="dialogAgregarTraje"
+                          closable="false" closeOnEscape="false" modal="true"
+                          dynamic="true" width="720px" resizable="false">
+                    <f:facet name="header">
+                        #{cc.attrs.controller.titleDialogTraje}
+                    </f:facet>
+
+                    <div class="ui-g">
+                        <div class="ui-g-5"><p:outputLabel value="#{i18n.detalle_factura_form_nombre}:" for="nombreTraje" /></div>
+                        <div class="ui-g-3"><p:outputLabel value="#{i18n.detalle_factura_form_cantidad}:" for="cantidadTraje" /></div>
+                        <div class="ui-g-3"><p:outputLabel value="#{i18n.detalle_factura_form_valor_unitario}:" for="valorUnitarioTraje" /></div>
+                        <div class="ui-g-1"></div>
+                    </div>
+
+                    <div class="ui-g">
+                        <div class="ui-g-5">
+                            <p:inputText id="nombreTraje" value="#{cc.attrs.controller.nombreTraje}" styleClass="anchoInput" placeholder="#{i18n.detalle_factura_placeholder_traje}" required="true" requiredMessage="#{i18n.detalle_factura_mensaje_error_traje_requerido}" />
+                        </div>
+                        <div class="ui-g-3">
+                            <p:inputNumber id="cantidadTraje" value="#{cc.attrs.controller.cantidadTraje}" styleClass="anchoInputNumber" padControl="false" decimalPlaces="0" minValue="0" emptyValue="empty" placeholder="#{i18n.detalle_factura_placeholder_cantidad}" required="true" requiredMessage="#{i18n.detalle_factura_mensaje_error_cantidad_requerido}" />
+                        </div>
+                        <div class="ui-g-3">
+                            <p:inputNumber id="valorUnitarioTraje" value="#{cc.attrs.controller.valorUnitarioTraje}" styleClass="anchoInputNumber" symbol="$" padControl="false" decimalPlaces="0" symbolPosition="p" minValue="0" emptyValue="empty" placeholder="#{i18n.detalle_factura_placeholder_valor_unitario}" required="true" requiredMessage="#{i18n.detalle_factura_mensaje_error_valor_unitario_requerido}" />
+                        </div>
+                        <div class="ui-g-1">
+                            <p:commandButton id="botonAgregarAccesorioToTraje" title="#{i18n.detalle_factura_boton_agregar_accesorio_traje}" actionListener="#{cc.attrs.controller.abrirDialogAgregarAccesorio(false)}" icon="fa fa-fw fa-plus" styleClass="aqua-button remove-outline" process="@this" />
+                        </div>
+                    </div>
+
+
+                    <p:outputPanel id="outputPanelDetalleTraje" class="ui-g" style="margin-top: 10px;">
+                        <div class="ui-g-12 ui-g-nopad">
+                            <p:dataTable id="tableDetalleTraje" widgetVar="tableDetalleTraje"
+                                         value="#{cc.attrs.controller.listDetalleTraje}" var="detalle" paginator="true" rows="10" paginatorPosition="bottom"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         currentPageReportTemplate="({startRecord} - {endRecord} #{i18n.de} {totalRecords})"
+                                         rowsPerPageTemplate="10, 15, 20" rowKey="#{detalle.id}"
+                                         emptyMessage="#{i18n.datatable_sin_registros}">
+
+                                <p:column headerText="#{i18n.detalle_factura_form_cantidad}" style="width: 80px">
+                                    <h:outputText value="#{detalle.cantidad}" />
+                                </p:column>
+
+                                <p:column headerText="#{i18n.detalle_factura_form_descripcion}">
+                                    <h:outputText value="#{detalle.traje.descripcion}" />
+                                </p:column>
+
+                                <p:column headerText="#{i18n.form_acciones}" style="width: 100px; text-align: center;">
+                                    <p:commandButton title="#{i18n.detalle_factura_boton_modificar_accesorio_traje}" icon="fa fa-fw fa-edit" styleClass="navy-button remove-outline" actionListener="#{cc.attrs.controller.abrirDialogModificarAccesorio(null, detalle, false)}" process="@this" />
+                                    <p:spacer width="5" />
+                                    <p:commandButton title="#{i18n.detalle_factura_boton_quitar_accesorio_traje}" icon="fa fa-fw fa-remove" styleClass="red-button remove-outline" actionListener="#{cc.attrs.controller.eliminarAccesorioTraje(null, detalle, false)}" update=":componenteDetalleFactura:formAgregarTraje:tableDetalleTraje" process="@this" />
+                                </p:column>
+                            </p:dataTable>
+                        </div>
+                    </p:outputPanel>
+
+
+                    <div class="ui-g-12 ui-g-nopad text-right" style="margin-top: 10px;">
+                        <p:commandButton value="#{i18n.detalle_factura_boton_agregar_traje_to_detalle}" actionListener="#{cc.attrs.controller.agregarTraje()}" icon="fa fa-fw fa-check-circle-o" styleClass="green-button remove-outline" rendered="#{!cc.attrs.controller.estaModificandoTraje}" />
+                        <p:commandButton value="#{i18n.detalle_factura_boton_agregar_modificar_to_detalle}" actionListener="#{cc.attrs.controller.modificarTraje()}" icon="fa fa-fw fa-refresh" styleClass="navy-button remove-outline" rendered="#{cc.attrs.controller.estaModificandoTraje}" />
+                        <p:spacer width="5" />
+                        <p:commandButton value="#{i18n.detalle_factura_boton_cancelar_accesorio}" actionListener="#{cc.attrs.controller.cerrarDialogAgregarTraje()}" icon="fa fa-fw fa-close" styleClass="red-button remove-outline" process="@this" />
+                    </div>
+                </p:dialog>
+            </h:form>
+
+
+            <h:form id="formDetalleFactura">
+                <p:outputPanel id="outputPanelDetalleFactura" style="margin-top: 10px;">
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-g-nopad">
+                            <p:dataTable id="tableDetalleFactura" widgetVar="tableDetalleFactura"
+                                         value="#{cc.attrs.listDetalleFactura}" var="detalle" paginator="true" rows="10" paginatorPosition="bottom"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         currentPageReportTemplate="({startRecord} - {endRecord} #{i18n.de} {totalRecords})"
+                                         rowsPerPageTemplate="10, 15, 20" rowKey="#{detalle.id}"
+                                         emptyMessage="#{i18n.datatable_sin_registros}">
+
+                                <p:column style="width: 40px; text-align: center;">
+                                    <p:rowToggler rendered="#{!detalle.esTipoTraje}" />
+                                </p:column>
+
+                                <p:column headerText="#{i18n.detalle_factura_form_es_accesorio}" style="width: 150px">
+                                    <h:outputText value="#{detalle.esTipoTraje ? i18n.si : i18n.no}" />
+                                </p:column>
+
+                                <p:column headerText="#{i18n.detalle_factura_form_cantidad}" style="width: 80px">
+                                    <h:outputText value="#{detalle.cantidad}" />
+                                </p:column>
+
+                                <p:column headerText="#{i18n.detalle_factura_form_descripcion}">
+                                    <h:outputText value="#{detalle.esTipoTraje ? detalle.traje.descripcion : detalle.nombreTraje}" />
+                                </p:column>
+
+                                <p:column headerText="#{i18n.detalle_factura_form_valor_unitario}" style="width: 150px">
+                                    <h:outputText value="#{detalle.valorUnitario}">
+                                        <f:convertNumber type="currency" currencySymbol="$" pattern="$ #,###" />
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column headerText="#{i18n.detalle_factura_form_valor_total}" style="width: 150px">
+                                    <h:outputText value="#{detalle.valorTotal}">
+                                        <f:convertNumber type="currency" currencySymbol="$" pattern="$ #,###" />
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column headerText="#{i18n.form_acciones}" style="width: 100px; text-align: center;">
+                                    <p:outputPanel rendered="#{detalle.esTipoTraje and serviciosController.tienePermisos(PermisoEnum.MODIFICAR_TRAJES)}">
+                                        <p:commandButton title="#{i18n.detalle_factura_boton_modificar_accesorio_traje}" icon="fa fa-fw fa-edit" styleClass="navy-button remove-outline" actionListener="#{cc.attrs.controller.abrirDialogModificarAccesorio(detalle, null, detalle.esTipoTraje)}" />
+                                        <p:spacer width="5" />
+                                        <p:commandButton title="#{i18n.detalle_factura_boton_quitar_accesorio_traje}" icon="fa fa-fw fa-remove" styleClass="red-button remove-outline" actionListener="#{cc.attrs.controller.eliminarAccesorioTraje(detalle, null, detalle.esTipoTraje)}" update=":componenteDetalleFactura:formDetalleFactura:tableDetalleFactura" />
+                                    </p:outputPanel>
+
+                                    <p:outputPanel rendered="#{!detalle.esTipoTraje and serviciosController.tienePermisos(PermisoEnum.MODIFICAR_TRAJES)}">
+                                        <p:commandButton title="#{i18n.detalle_factura_boton_modificar_traje}" icon="fa fa-fw fa-edit" styleClass="navy-button remove-outline" actionListener="#{cc.attrs.controller.abrirDialogModificarTraje(detalle)}" />
+                                        <p:spacer width="5" />
+                                        <p:commandButton title="#{i18n.detalle_factura_boton_quitar_traje}" icon="fa fa-fw fa-remove" styleClass="red-button remove-outline" actionListener="#{cc.attrs.controller.eliminarTraje(detalle)}" update=":componenteDetalleFactura:formDetalleFactura:tableDetalleFactura" />
+                                    </p:outputPanel>
+                                </p:column>
+
+
+                                <p:rowExpansion>
+                                    <div class="ui-g">
+                                        <p:dataTable value="#{detalle.listDetalleTraje}" var="detalleTraje" paginator="false"
+                                                     emptyMessage="#{i18n.datatable_sin_registros}">
+
+                                            <p:column headerText="#{i18n.detalle_factura_form_cantidad}" style="width: 200px">
+                                                <h:outputText value="#{detalleTraje.cantidad}" />
+                                            </p:column>
+
+                                            <p:column headerText="#{i18n.detalle_factura_form_descripcion}">
+                                                <h:outputText value="#{detalleTraje.traje.descripcion}" />
+                                            </p:column>
+                                        </p:dataTable>
+                                    </div>
+                                </p:rowExpansion>
+                            </p:dataTable>
+                        </div>
+                    </div>
+                </p:outputPanel>
+            </h:form>
+
+        </composite:implementation>
+
+    </h:body>
+
+</html>

@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+	<h:outputStylesheet library="bootstrap" name="css/bootstrap.min.css" />
+	<h:outputStylesheet library="bootstrap"
+		name="css/bootstrap-theme.min.css" />
+	<h:outputStylesheet library="css" name="cssLayout.css" />
+
+	<title>#{i18n.login_title_iniciar_sesion}</title>
+</h:head>
+
+<h:body id="container" class="container">
+
+	<div id="top" class="row ui-fluid ui-g">
+		<div class="top_left ui-g-6">
+			<div class="content_top_left">
+				<!--<h:outputLabel value=" RentERP" styleClass="fa fa-bank" style="font-size: 6vh" />-->
+				<h:outputLabel value=" Ritmo Cardiaco" styleClass="fa fa-heart"
+					style="font-size: 44px" />
+			</div>
+		</div>
+	</div>
+
+	<div id="middle">
+
+		<div id="content">
+
+			<div class="ui-fluid ui-g">
+				<div class="ui-g-4"></div>
+				<div class="ui-g-4">
+					<h:form id="formLogin">
+
+						<p:panel id="form-login" header="#{i18n.login_iniciar_sesion}"
+							style="margin-top: 20px">
+							<h:panelGrid columns="1" cellpadding="10"
+								style="width: 100% !important">
+								<p:outputLabel value="#{i18n.login_form_nombre_usuario}:"
+									for="username" />
+								<p:inputText id="username"
+									value="#{loginController.usuario.username}"
+									placeholder="#{i18n.login_placeholder_nombre_usuario}"
+									required="true"
+									requiredMessage="#{i18n.login_mensaje_error_nombre_usuario_requerido}" />
+								<!--<p:tooltip for="username" value="Ingrese su Nombre de usuario..." />-->
+
+								<p:spacer height="2" />
+
+								<p:outputLabel value="#{i18n.login_form_contrasenia}:"
+									for="password" />
+								<p:password id="password"
+									value="#{loginController.usuario.password}"
+									placeholder="#{i18n.login_placeholder_contrasenia}"
+									required="true"
+									requiredMessage="#{i18n.login_mensaje_error_contrasenia_requerida}" />
+								<!--<p:tooltip for="password" value="Ingrese su Contraseña..." />-->
+
+								<p:spacer height="2" />
+
+								<p:commandButton value="#{i18n.login_iniciar_sesion}"
+									actionListener="#{loginController.iniciarSesion()}"
+									icon="fa fa-unlock-alt" update="formLogin" />
+							</h:panelGrid>
+						</p:panel>
+
+						<p:spacer height="2" />
+						
+						<center>
+							<p:link value="#{i18n.registro_registrarse}" href="../app/registro" />
+						</center>
+					</h:form>
+				</div>
+				<div class="ui-g-4"></div>
+			</div>
+
+			<h:outputScript library="bootstrap" name="js/bootstrap.min.js" />
+
+			<p:growl id="messages" autoUpdate="true" sticky="true" />
+
+		</div>
+	</div>
+</h:body>
+</html>
+

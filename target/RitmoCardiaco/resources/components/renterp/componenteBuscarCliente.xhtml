@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+        <composite:interface>
+            <composite:attribute name="controller" type="com.eljavatar.renterp.app.view.controller.AbstractComponentsController" required="true" />
+            <!--<composite:attribute name="clienteSeleccionado" type="com.eljavatar.renterp.app.model.maestros.Cliente" required="true" />-->
+            <composite:attribute name="componentUpdate" required="true" />
+        </composite:interface>
+
+        <composite:implementation>
+
+            <h:form id="formBuscarCliente">
+                <p:dialog id="dialogBuscarCliente" widgetVar="dialogBuscarCliente"
+                          closable="false" closeOnEscape="false" modal="true"
+                          dynamic="true" width="850px" resizable="false">
+                    <f:facet name="header">
+                        #{i18n.buscar_cliente_title_dialog_buscar_cliente}
+                    </f:facet>
+
+                    <p:outputPanel id="panelFiltrosBuscarCliente" style="margin-bottom: 10px;">
+                        <div class="ui-g">
+                            <div class="ui-g-6 ui-g-nopad">
+                                <div class="ui-g-4 text-right"><p:outputLabel value="#{i18n.buscar_cliente_form_tipo_documento}:" /></div>
+                                <div class="ui-g-8">
+                                    <p:selectOneMenu id="filtrTipoDocumentoCliente" autoWidth="true" value="#{busquedaClientesController.filtroBusquedaClienteDto.tipoDocumento}" converter="omnifaces.SelectItemsConverter">
+                                        <f:selectItem noSelectionOption="true" itemLabel="#{i18n.one_menu_seleccione}" itemValue="#{null}" />
+                                        <f:selectItems value="#{busquedaClientesController.listTipoDocumento}" var="tipoDoc" itemLabel="#{tipoDoc.descripcion}" itemValue="#{tipoDoc}" />
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                            <div class="ui-g-6 ui-g-nopad">
+                                <div class="ui-g-4 text-right"><p:outputLabel value="#{i18n.buscar_cliente_form_numero_documento}:" /></div>
+                                <div class="ui-g-8">
+                                    <p:inputText id="filtroNumeroDocumentoCliente" value="#{busquedaClientesController.filtroBusquedaClienteDto.numeroDocumento}" placeholder="#{i18n.buscar_cliente_placeholder_numero_documento}" styleClass="anchoInput" />
+                                </div>
+                            </div>
+
+                            <div class="ui-g-6 ui-g-nopad">
+                                <div class="ui-g-4 text-right"><p:outputLabel value="#{i18n.buscar_cliente_form_nombres}:" /></div>
+                                <div class="ui-g-8">
+                                    <p:inputText id="filtroNombresCliente" value="#{busquedaClientesController.filtroBusquedaClienteDto.nombres}" placeholder="#{i18n.buscar_cliente_placeholder_nombres}" styleClass="anchoInput" />
+                                </div>
+                            </div>
+                            <div class="ui-g-6 ui-g-nopad">
+                                <div class="ui-g-4 text-right"><p:outputLabel value="#{i18n.buscar_cliente_form_apellidos}:" /></div>
+                                <div class="ui-g-8">
+                                    <p:inputText id="filtroApellidosCliente" value="#{busquedaClientesController.filtroBusquedaClienteDto.apellidos}" placeholder="#{i18n.buscar_cliente_placeholder_apellidos}" styleClass="anchoInput" />
+                                </div>
+                            </div>
+
+                            <div class="ui-g-12 ui-g-nopad text-right" style="margin-top: 10px;">
+                                <p:commandButton value="#{i18n.buscar_cliente_boton_buscar}" actionListener="#{busquedaClientesController.buscarCliente()}" icon="fa fa-fw fa-search" styleClass="aqua-button remove-outline" />
+                                <p:spacer width="5" />
+                                <p:commandButton value="#{i18n.buscar_cliente_boton_limpiar}" actionListener="#{busquedaClientesController.limpiarFormulario()}" icon="fa fa-fw fa-eraser" styleClass="orange-button remove-outline" />
+                                <p:spacer width="5" />
+                                <p:commandButton value="#{i18n.buscar_cliente_boton_cancelar}" actionListener="#{busquedaClientesController.cancelarBusqueda()}" icon="fa fa-fw fa-close" styleClass="red-button remove-outline" />
+                            </div>
+                        </div>
+                    </p:outputPanel>
+
+                    <p:outputPanel id="panelResultadoBusquedaClientes">
+                        <p:dataTable id="tableBusquedaClientes" widgetVar="tableBusquedaClientes"
+                                     value="#{busquedaClientesController.listBusquedaClientes}"
+                                     var="cliente" paginator="true" rows="10" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     currentPageReportTemplate="({startRecord} - {endRecord} #{i18n.de} {totalRecords})"
+                                     rowsPerPageTemplate="10, 15, 20" selectionMode="single" rowKey="#{cliente.id}"
+                                     emptyMessage="#{i18n.datatable_sin_registros}" scrollable="true" scrollWidth="inherit">
+
+                            <p:column headerText="#{i18n.buscar_cliente_form_tipo_documento}" style="width: 30%;">
+                                <h:outputText value="#{cliente.tipoDocumento.descripcion}" />
+                            </p:column>
+
+                            <p:column headerText="#{i18n.buscar_cliente_form_numero_documento}" style="width: 15%;">
+                                <h:outputText value="#{cliente.numeroDocumento}" />
+                            </p:column>
+
+                            <p:column headerText="#{i18n.buscar_cliente_form_nombres}">
+                                <h:outputText value="#{cliente.nombres}" />
+                            </p:column>
+
+                            <p:column headerText="#{i18n.buscar_cliente_form_apellidos}">
+                                <h:outputText value="#{cliente.apellidos}" />
+                            </p:column>
+
+                            <p:column headerText="#{i18n.form_acciones}" style="width: 80px; text-align: center;">
+                                <p:commandButton title="#{i18n.buscar_cliente_boton_seleccionar}" icon="fa fa-fw fa-check-circle-o" styleClass="green-button remove-outline" actionListener="#{cc.attrs.controller.seleccionarCliente(cliente)}" update="#{cc.attrs.componentUpdate}" oncomplete="PF('dialogBuscarCliente').hide()" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:outputPanel>
+
+
+                </p:dialog>
+            </h:form>
+
+        </composite:implementation>
+
+    </h:body>
+
+</html>

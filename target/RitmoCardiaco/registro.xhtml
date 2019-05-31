@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+	<h:outputStylesheet library="bootstrap" name="css/bootstrap.min.css" />
+	<h:outputStylesheet library="bootstrap"
+		name="css/bootstrap-theme.min.css" />
+	<h:outputStylesheet library="css" name="cssLayout.css" />
+
+	<title>#{i18n.registro_title_iniciar_sesion}</title>
+</h:head>
+
+<h:body id="container" class="container">
+
+	<div id="top" class="row ui-fluid ui-g">
+		<div class="top_left ui-g-6">
+			<div class="content_top_left">
+				<!--<h:outputLabel value=" RentERP" styleClass="fa fa-bank" style="font-size: 6vh" />-->
+				<h:outputLabel value=" Ritmo Cardiaco" styleClass="fa fa-heart"
+					style="font-size: 44px" />
+			</div>
+		</div>
+	</div>
+
+	<div id="middle">
+
+		<div id="content">
+
+			<div class="ui-fluid ui-g">
+				<div class="ui-g-4"></div>
+				<div class="ui-g-4">
+					<h:form id="formRegistro">
+
+						<p:panel id="form-login" header="#{i18n.registro_registrarse}"
+							style="margin-top: 20px">
+							<h:panelGrid columns="1" cellpadding="10"
+								style="width: 100% !important">
+								<p:outputLabel value="#{i18n.registro_form_nombre_usuario}:"
+									for="username" />
+								<p:inputText id="username"
+									value="#{registroController.persona.username}"
+									placeholder="#{i18n.registro_placeholder_nombre_usuario}"
+									required="true"
+									requiredMessage="#{i18n.registro_mensaje_error_nombre_usuario_requerido}" />
+								<!--<p:tooltip for="username" value="Ingrese su Nombre de usuario..." />-->
+
+								<p:spacer height="2" />
+
+								<p:outputLabel value="#{i18n.registro_form_contrasenia}:"
+									for="password" />
+								<p:password id="password"
+									value="#{registroController.persona.password}"
+									placeholder="#{i18n.registro_placeholder_contrasenia}"
+									required="true"
+									requiredMessage="#{i18n.registro_mensaje_error_contrasenia_requerida}" />
+								<!--<p:tooltip for="password" value="Ingrese su Contraseña..." />-->
+
+								<p:spacer height="2" />
+
+								<p:outputLabel value="#{i18n.registro_form_nombres}:"
+									for="nombres" />
+								<p:inputText id="nombres"
+									value="#{registroController.persona.nombres}"
+									placeholder="#{i18n.registro_placeholder_nombres}"
+									required="true"
+									requiredMessage="#{i18n.registro_mensaje_error_nombres_requerido}" />
+								<!--<p:tooltip for="password" value="Ingrese su Contraseña..." />-->
+
+								<p:spacer height="2" />
+
+								<p:outputLabel value="#{i18n.registro_form_apellidos}:"
+									for="apellidos" />
+								<p:inputText id="apellidos"
+									value="#{registroController.persona.apellidos}"
+									placeholder="#{i18n.registro_placeholder_apellidos}"
+									required="true"
+									requiredMessage="#{i18n.registro_mensaje_error_apellidos_requerido}" />
+								<!--<p:tooltip for="password" value="Ingrese su Contraseña..." />-->
+
+								<p:spacer height="2" />
+
+								<p:outputLabel value="#{i18n.registro_form_sexo}:" for="sexo" />
+								<p:selectOneMenu id="sexo"
+									value="#{registroController.persona.sexo}" required="true"
+									requiredMessage="#{i18n.registro_mensaje_error_sexo_requerido}">
+									<f:selectItem itemLabel="#{i18n.one_menu_seleccione}"
+										noSelectionOption="true" itemValue="#{null}" />
+									<f:selectItems value="#{registroController.listSexo}"
+										var="sexo" itemLabel="#{sexo.descripcion}" itemValue="#{sexo}" />
+								</p:selectOneMenu>
+								<!--<p:tooltip for="password" value="Ingrese su Contraseña..." />-->
+
+								<p:spacer height="2" />
+
+								<p:outputLabel value="#{i18n.registro_form_fecha_nacimiento}:"
+									for="fechaNacimiento" />
+								<p:calendar id="fechaNacimiento"
+									value="#{registroController.persona.fechaNacimiento}"
+									showOn="button" locale="es"
+									placeholder="#{i18n.registro_placeholder_fecha_nacimiento}"
+									readonlyInput="true" navigator="true" pattern="yyyy-MM-dd"
+									yearRange="c-219:c+5" required="true"
+									requiredMessage="#{i18n.registro_mensaje_error_fecha_nacimiento_requerida}" />
+								<!--<p:tooltip for="password" value="Ingrese su Contraseña..." />-->
+
+								<p:spacer height="2" />
+
+								<p:commandButton value="#{i18n.registro_registrarse}"
+									actionListener="#{registroController.registrar()}"
+									icon="fa fa-user" update="formRegistro" />
+							</h:panelGrid>
+						</p:panel>
+
+						<p:spacer height="2" />
+
+						<center>
+							<p:link value="#{i18n.login_iniciar_sesion}" href="../app/login" />
+						</center>
+
+						<p:confirmDialog header="#{i18n.registro_confirm_title}"
+							closeOnEscape="false" closable="false" severity="info"
+							id="confirmRegistro" widgetVar="confirmRegistro"
+							message="#{i18n.registro_confirm_message}">
+							<p:commandButton value="#{i18n.aceptar}" process="@this"
+								styleClass="ui-confirmdialog-yes" icon="fa fa-check"
+								actionListener="#{registroController.redirectToLogin()}" />
+						</p:confirmDialog>
+
+					</h:form>
+				</div>
+				<div class="ui-g-4"></div>
+			</div>
+
+			<h:outputScript library="bootstrap" name="js/bootstrap.min.js" />
+
+			<p:growl id="messages" autoUpdate="true" sticky="true" />
+
+		</div>
+	</div>
+</h:body>
+</html>
+

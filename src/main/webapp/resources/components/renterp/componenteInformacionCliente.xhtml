@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+        <composite:interface>
+            <composite:attribute name="controller" type="com.eljavatar.renterp.app.view.controller.AbstractComponentsController" required="true" />
+            <composite:attribute name="clienteSeleccionado" type="com.eljavatar.renterp.app.model.maestros.Cliente" required="true" />
+        </composite:interface>
+
+        <composite:implementation>
+
+            <h:form id="formInformacionCliente">
+                <p:outputPanel id="outputPanelInformacionCliente">
+                    <div class="ui-g">
+                        <div class="ui-g-4 ui-g-nopad">
+                            <div class="ui-g-3 ui-g-nopad"><p:outputLabel value="#{i18n.informacion_cliente_form_documento_cliente}:" /></div>
+                            <div class="ui-g-9 ui-g-nopad">#{cc.attrs.clienteSeleccionado.tipoDocumento != null ? (cc.attrs.clienteSeleccionado.tipoDocumento.codigo.concat(' - ').concat(cc.attrs.clienteSeleccionado.numeroDocumento)) : ''}</div>
+                        </div>
+                        <div class="ui-g-4 ui-g-nopad">
+                            <div class="ui-g-3 ui-g-nopad"><p:outputLabel value="#{i18n.informacion_cliente_form_nombres_cliente}:" /></div>
+                            <div class="ui-g-9 ui-g-nopad"><h:outputText value="#{cc.attrs.clienteSeleccionado.nombres}" /></div>
+                        </div>
+                        <div class="ui-g-4 ui-g-nopad">
+                            <div class="ui-g-3 ui-g-nopad"><p:outputLabel value="#{i18n.informacion_cliente_form_apellidos_cliente}:" /></div>
+                            <div class="ui-g-9 ui-g-nopad"><h:outputText value="#{cc.attrs.clienteSeleccionado.apellidos}" /></div>
+                        </div>
+
+                        <div class="ui-g-4 ui-g-nopad">
+                            <div class="ui-g-3 ui-g-nopad"><p:outputLabel value="#{i18n.informacion_cliente_form_telefono1_cliente}:" /></div>
+                            <div class="ui-g-9 ui-g-nopad"><h:outputText value="#{cc.attrs.clienteSeleccionado.telefono1}" /></div>
+                        </div>
+                        <div class="ui-g-4 ui-g-nopad">
+                            <div class="ui-g-3 ui-g-nopad"><p:outputLabel value="#{i18n.informacion_cliente_form_telefono2_cliente}:" /></div>
+                            <div class="ui-g-9 ui-g-nopad"><h:outputText value="#{cc.attrs.clienteSeleccionado.telefono2}" /></div>
+                        </div>
+                        <div class="ui-g-4 ui-g-nopad">
+                            <div class="ui-g-3 ui-g-nopad"><p:outputLabel value="#{i18n.informacion_cliente_form_email_cliente}:" /></div>
+                            <div class="ui-g-9 ui-g-nopad"><h:outputText value="#{cc.attrs.clienteSeleccionado.email}" /></div>
+                        </div>
+
+                        <div class="ui-g-4 ui-g-nopad">
+                            <div class="ui-g-3 ui-g-nopad"><p:outputLabel value="#{i18n.informacion_cliente_form_direccion_cliente}:" /></div>
+                            <div class="ui-g-9 ui-g-nopad"><h:outputText value="#{cc.attrs.clienteSeleccionado.direccion}" /></div>
+                        </div>
+                        <div class="ui-g-4 ui-g-nopad">
+                            <div class="ui-g-3 ui-g-nopad"><p:outputLabel value="#{i18n.informacion_cliente_form_referencia_cliente}:" /></div>
+                            <div class="ui-g-9 ui-g-nopad"><h:outputText value="#{cc.attrs.clienteSeleccionado.referencia}" /></div>
+                        </div>
+                        <div class="ui-g-4 ui-g-nopad">
+                        </div>
+
+                        <div class="ui-g-6 ui-g-nopad">
+                            <p:commandButton value="#{i18n.informacion_cliente_boton_buscar_cliente}" actionListener="#{busquedaClientesController.abrirDialogBuscarCliente()}" icon="fa fa-fw fa-search" styleClass="aqua-button remove-outline" rendered="#{serviciosController.tienePermisos(PermisoEnum.MODIFICAR_CLIENTES)}" />
+                            <p:spacer width="5" />
+<!--                            <p:commandButton value="#{i18n.informacion_cliente_boton_modificar_cliente}" icon="fa fa-fw fa-edit" styleClass="green-button remove-outline" disabled="#{cc.attrs.clienteSeleccionado.id == null}" rendered="#{serviciosController.tienePermisos(PermisoEnum.CREAR_CLIENTES)}" />
+                            <p:spacer width="5" />
+                            <p:commandButton value="#{i18n.informacion_cliente_boton_crear_cliente}" icon="fa fa-fw fa-plus" styleClass="navy-button remove-outline" disabled="#{cc.attrs.clienteSeleccionado.id != null}" rendered="#{serviciosController.tienePermisos(PermisoEnum.MODIFICAR_CLIENTES)}" />
+                            <p:spacer width="5" />-->
+                            <p:commandButton value="#{i18n.informacion_cliente_boton_quitar_cliente}" actionListener="#{cc.attrs.controller.quitarCliente()}" update=":componenteInformacionCliente:formInformacionCliente" icon="fa fa-fw fa-eraser" styleClass="red-button remove-outline" disabled="#{cc.attrs.clienteSeleccionado.id == null}" rendered="#{serviciosController.tienePermisos(PermisoEnum.MODIFICAR_CLIENTES)}" />
+                        </div>
+
+                    </div>
+                </p:outputPanel>
+            </h:form>
+
+        </composite:implementation>
+
+    </h:body>
+
+</html>
