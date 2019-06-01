@@ -19,10 +19,10 @@ import com.eljavatar.udistrital.ritmocardiaco.logfactory.Log;
 @FacesConverter("eljavatar.SelectedItemsConverter")
 public class SelectedItemsConverter implements Converter {
 
-	@Inject
-	private Log log;
-	
-	@Override
+    @Inject
+    private Log log;
+
+    @Override
     public Object getAsObject(final FacesContext context, final UIComponent component, final String value) {
         try {
             byte[] data = Base64.decode(value);
@@ -46,9 +46,9 @@ public class SelectedItemsConverter implements Converter {
             oos.close();
             return new String(Base64.encodeToByte(baos.toByteArray(), false));
         } catch (IOException e) {
-        	log.error("Exception obteniendo String desde Objeto del componente", e);
+            log.error("Exception obteniendo String desde Objeto del componente", e);
         }
         return null;
     }
-    
+
 }

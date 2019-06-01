@@ -16,12 +16,9 @@ import com.ocpsoft.pretty.faces.annotation.URLMapping;
 @URLMapping(id = "index", pattern = "/app/index", viewId = "/faces/index.xhtml")
 public class InicioController implements Serializable {
     
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5154840181847946088L;
+    private static final long serialVersionUID = 5154840181847946088L;
 
-	private String welcome;
+    private String welcome;
     
     @UserInfo
     @Inject
@@ -33,7 +30,7 @@ public class InicioController implements Serializable {
     
     @PostConstruct
     public void init() {
-        this.welcome = "Bienvenido a Ritmo Cardiaco " + usuario.getUsername();
+        this.welcome = "Bienvenido a Ritmo Cardiaco " + usuario.getNombreCompleto();
     }
     
     public String getWelcome() {

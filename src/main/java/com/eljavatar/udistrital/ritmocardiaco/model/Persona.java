@@ -18,90 +18,90 @@ import javax.persistence.TemporalType;
 @Table(name = "persona", schema = "ritmo_cardiaco")
 public class Persona implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3505515061916714519L;
-	
-	@Id
-	@Column
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	
-	@Column
-	private String username;
-	
-	@Column
-	private String password;
-	
-	@Column
-	private String nombres;
-	
-	@Column
-	private String apellidos;
-	
-	@Column
-	@Enumerated(EnumType.STRING)
-	private SexoEnum sexo;
-	
-	@Column(name = "fecha_nacimiento")
-	@Temporal(TemporalType.DATE)
-	private Date fechaNacimiento;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -3505515061916714519L;
 
-	public Integer getId() {
-		return id;
-	}
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @Column
+    private String username;
 
-	public String getUsername() {
-		return username;
-	}
+    @Column
+    private String password;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    @Column
+    private String nombres;
 
-	public String getPassword() {
-		return password;
-	}
+    @Column
+    private String apellidos;
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    @Column
+    @Enumerated(EnumType.STRING)
+    private SexoEnum sexo;
 
-	public String getNombres() {
-		return nombres;
-	}
+    @Column(name = "fecha_nacimiento")
+    @Temporal(TemporalType.DATE)
+    private Date fechaNacimiento;
 
-	public void setNombres(String nombres) {
-		this.nombres = nombres;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getApellidos() {
-		return apellidos;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public SexoEnum getSexo() {
-		return sexo;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setSexo(SexoEnum sexo) {
-		this.sexo = sexo;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public SexoEnum getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(SexoEnum sexo) {
+        this.sexo = sexo;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
 
 }

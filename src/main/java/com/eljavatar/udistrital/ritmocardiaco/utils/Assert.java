@@ -7,11 +7,11 @@ import java.util.Map;
 public class Assert implements Serializable {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1957454992636807243L;
+     *
+     */
+    private static final long serialVersionUID = 1957454992636807243L;
 
-	private Assert() {
+    private Assert() {
     }
 
     /**

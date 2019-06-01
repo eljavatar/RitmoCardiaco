@@ -11,6 +11,6 @@ import javax.inject.Qualifier;
 @Target({java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD})
 public @interface I18n {
 
-	public abstract String value() default "i18n";
+    public abstract String value() default "i18n";
 	
 }

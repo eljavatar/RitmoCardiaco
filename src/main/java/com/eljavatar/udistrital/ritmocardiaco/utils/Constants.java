@@ -2,7 +2,7 @@ package com.eljavatar.udistrital.ritmocardiaco.utils;
 
 public interface Constants {
 
-	String DEFAULT_INDEX_PAGE = "index.xhtml";
+    String DEFAULT_INDEX_PAGE = "index.xhtml";
     String DEFAULT_LOGIN_PAGE = "login.xhtml";
     String DEFAULT_ERROR_PAGE = "500.xhtml";
     String ACCESS_DENIED_PAGE = "/app/403";
@@ -16,5 +16,5 @@ public interface Constants {
         String ERROR_PAGE = "com.github.adminfaces.ERROR_PAGE";
         String INDEX_PAGE = "com.github.adminfaces.INDEX_PAGE";
     }
-    
+
 }

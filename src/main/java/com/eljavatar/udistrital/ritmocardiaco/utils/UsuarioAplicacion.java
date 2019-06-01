@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 public class UsuarioAplicacion implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3057946615752572775L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -3057946615752572775L;
 
-	private Integer id;
+    private Integer id;
     private String username;
     private String password;
     private String nombres;
@@ -27,7 +27,7 @@ public class UsuarioAplicacion implements Serializable {
 
     public UsuarioAplicacion() {
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -45,14 +45,14 @@ public class UsuarioAplicacion implements Serializable {
     }
 
     public String getPassword() {
-		return password;
-	}
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getNombres() {
+    public String getNombres() {
         return nombres;
     }
 
@@ -75,5 +75,5 @@ public class UsuarioAplicacion implements Serializable {
     public void setNombreCompleto(String nombreCompleto) {
         this.nombreCompleto = nombreCompleto;
     }
-    
+
 }

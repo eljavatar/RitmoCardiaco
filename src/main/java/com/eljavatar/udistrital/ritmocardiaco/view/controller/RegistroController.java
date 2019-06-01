@@ -27,58 +27,55 @@ import com.ocpsoft.pretty.faces.annotation.URLMapping;
 @URLMapping(id = "registro", pattern = "/app/registro", viewId = "/faces/registro.xhtml")
 public class RegistroController implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1964410862426978957L;
-	
-	@Inject
-	private PersonaManagerEjb personaManagerEjb;
-	
-	@Inject
+    private static final long serialVersionUID = -1964410862426978957L;
+
+    @Inject
+    private PersonaManagerEjb personaManagerEjb;
+
+    @Inject
     private FacesMessagesUtil facesMessagesUtil;
-    
+
     @Inject
     @I18n
     transient ResourceBundle resourceBundle;
-    
+
     @Inject
     private ExceptionUtils exceptionUtils;
-    
+
     @Inject
     private FacesUtils facesUtils;
-	
-	private Persona persona;
-	
-	@PostConstruct
-	public void init() {
-		this.persona = new Persona();
-	}
-	
-	public void registrar() {
-		try {
-			personaManagerEjb.registrarPersona(persona);
-			persona = new Persona();
-			PrimeFaces.current().executeScript("PF('confirmRegistro').show()");
-		} catch (BusinessException ex) {
-			this.facesMessagesUtil.addError(exceptionUtils.createMessage(resourceBundle, ex));
-		}
-	}
-	
-	public void redirectToLogin() {
-		this.facesUtils.urlRedirect("../app/login");
-	}
 
-	public Persona getPersona() {
-		return persona;
-	}
+    private Persona persona;
 
-	public void setPersona(Persona persona) {
-		this.persona = persona;
-	}
-	
-	public List<SexoEnum> getListSexo() {
-		return Arrays.asList(SexoEnum.values());
-	}
+    @PostConstruct
+    public void init() {
+        this.persona = new Persona();
+    }
+
+    public void registrar() {
+        try {
+            personaManagerEjb.registrarPersona(persona);
+            persona = new Persona();
+            PrimeFaces.current().executeScript("PF('confirmRegistro').show()");
+        } catch (BusinessException ex) {
+            this.facesMessagesUtil.addError(exceptionUtils.createMessage(resourceBundle, ex));
+        }
+    }
+
+    public void redirectToLogin() {
+        this.facesUtils.urlRedirect("../app/login");
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    public List<SexoEnum> getListSexo() {
+        return Arrays.asList(SexoEnum.values());
+    }
 
 }

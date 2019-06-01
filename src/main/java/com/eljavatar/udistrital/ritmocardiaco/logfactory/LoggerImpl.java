@@ -1,14 +1,11 @@
 package com.eljavatar.udistrital.ritmocardiaco.logfactory;
 
-import org.slf4j.Logger;
+import org.jboss.logging.Logger;
 
 public class LoggerImpl implements Log {
 
-/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7304801181122907473L;
-	private final Logger LOGGER;
+    private static final long serialVersionUID = 7304801181122907473L;
+    private final Logger LOGGER;
     
     public LoggerImpl(Logger logger) {
         this.LOGGER = logger;

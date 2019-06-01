@@ -8,12 +8,12 @@ import javax.ejb.ApplicationException;
 @ApplicationException(rollback = true)
 public class BusinessException extends Exception implements IException {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4757728946817296374L;
-	
-	private Enum codigoError;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 4757728946817296374L;
+
+    private Enum codigoError;
     private String[] params;
     private String mensaje;
 
@@ -29,7 +29,7 @@ public class BusinessException extends Exception implements IException {
         Objects.requireNonNull(codigoError);
         this.codigoError = codigoError;
     }
-    
+
     public BusinessException(Enum codigoError, String[] params) {
         this(codigoError);
         this.params = params;
@@ -40,13 +40,13 @@ public class BusinessException extends Exception implements IException {
         Objects.requireNonNull(codigoError);
         this.codigoError = codigoError;
     }
-    
+
     public BusinessException(Enum codigoError, String message, Throwable cause) {
         super(message, cause);
         this.mensaje = message;
         this.codigoError = codigoError;
     }
-    
+
     public BusinessException(String message, Throwable cause) {
         super(message, cause);
         this.mensaje = message;
@@ -61,7 +61,7 @@ public class BusinessException extends Exception implements IException {
         super(cause);
         this.mensaje = cause.getMessage();
     }
-    
+
     public BusinessException() {
         super();
     }
@@ -80,5 +80,5 @@ public class BusinessException extends Exception implements IException {
     public String getMensaje() {
         return mensaje;
     }
-    
+
 }

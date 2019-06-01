@@ -2,15 +2,16 @@ package com.eljavatar.udistrital.ritmocardiaco.logfactory;
 
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.jboss.logging.Logger;
 
 public class LogProducer {
 
-	@Produces
+    @Produces
     public Log getLogger(InjectionPoint injectionPoint) {
-        Logger logger = LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass());
+        // Slf4j
+        //Logger logger = LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass());
+        // JBoss Logging
+        Logger logger = Logger.getLogger(injectionPoint.getMember().getDeclaringClass());
         return new LoggerImpl(logger);
     }
 	

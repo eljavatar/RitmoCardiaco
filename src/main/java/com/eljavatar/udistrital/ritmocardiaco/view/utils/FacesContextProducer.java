@@ -6,7 +6,7 @@ import javax.faces.context.FacesContext;
 
 public class FacesContextProducer {
 
-	@Produces
+    @Produces
     @RequestScoped
     public FacesContext getFacesContext() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -15,5 +15,5 @@ public class FacesContextProducer {
         }
         return facesContext;
     }
-	
+
 }

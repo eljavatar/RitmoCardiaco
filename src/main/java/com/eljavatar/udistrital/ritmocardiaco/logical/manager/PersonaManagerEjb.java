@@ -12,24 +12,27 @@ import com.eljavatar.udistrital.ritmocardiaco.model.Persona;
 @Stateless
 public class PersonaManagerEjb implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -677020628892571779L;
-	
-//	@PersistenceContext(unitName = "ritmoCardiacoDS")
-//    private EntityManager em;
-	
-	@Inject
-	private AbstractManagerEjb<Persona> managerPersona;
-	
-	public void registrarPersona(Persona persona) throws BusinessException {
-		managerPersona.setEntityClass(Persona.class);
-		try {
-			managerPersona.insert(persona);
-		} catch (BusinessException ex) {
-			throw new BusinessException(MensajeErrorEnum.EXCEPTION_INSERT_ENTITY);
-		}
-	}
+    /**
+     *
+     */
+    private static final long serialVersionUID = -677020628892571779L;
+    
+    @Inject
+    private AbstractManagerEjb<Persona> managerPersona;
+
+    public void registrarPersona(Persona persona) throws BusinessException {
+        managerPersona.setEntityClass(Persona.class);
+        try {
+            managerPersona.insert(persona);
+        } catch (BusinessException ex) {
+            throw new BusinessException(MensajeErrorEnum.EXCEPTION_INSERT_PERSONA);
+        }
+    }
+    
+    public Persona buscarPersonaById(Integer id) throws BusinessException {
+        managerPersona.setEntityClass(Persona.class);
+        
+        return managerPersona.findById(id);
+    }
 
 }

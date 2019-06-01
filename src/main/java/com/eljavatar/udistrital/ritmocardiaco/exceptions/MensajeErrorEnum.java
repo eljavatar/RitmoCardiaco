@@ -2,7 +2,7 @@ package com.eljavatar.udistrital.ritmocardiaco.exceptions;
 
 public enum MensajeErrorEnum {
 
-	SYSTEM_ERROR,
+    SYSTEM_ERROR,
     
     EXCEPTION_OBTENIENDO_LIST_ENTITY,
     EXCEPTION_INSERT_ENTITY,
@@ -14,6 +14,7 @@ public enum MensajeErrorEnum {
     
     EXCEPTION_SEARCH_USER_BY_USERNAME,
     
-    EXCEPTION_INSERT_PERSONA;
+    EXCEPTION_INSERT_PERSONA,
+    EXCEPTION_INSERT_HISTORICO_RITMO;
 	
 }

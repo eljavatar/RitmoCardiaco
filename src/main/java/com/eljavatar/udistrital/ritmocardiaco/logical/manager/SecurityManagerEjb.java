@@ -18,17 +18,17 @@ import com.eljavatar.udistrital.ritmocardiaco.utils.UsuarioAplicacion;
 @Stateless
 public class SecurityManagerEjb implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5182166128917279364L;
-	
-	@PersistenceContext(unitName = "ritmoCardiacoDS")
+    /**
+     *
+     */
+    private static final long serialVersionUID = -5182166128917279364L;
+
+    @PersistenceContext(unitName = "ritmoCardiacoDS")
     private EntityManager em;
-	
-	@Inject
-	private Log log;
-    
+
+    @Inject
+    private Log log;
+
     public UsuarioAplicacion searchUserByUsername(String username) throws BusinessException {
         // Obtenemos el usuario
         StringBuilder sqlUsuario = new StringBuilder();
@@ -43,19 +43,19 @@ public class SecurityManagerEjb implements Serializable {
         sqlUsuario.append("    Persona p ");
         sqlUsuario.append("WHERE ");
         sqlUsuario.append("    p.username = :username");
-        
+
         try {
-        	TypedQuery<UsuarioAplicacion> query = em.createQuery(sqlUsuario.toString(), UsuarioAplicacion.class)
+            TypedQuery<UsuarioAplicacion> query = em.createQuery(sqlUsuario.toString(), UsuarioAplicacion.class)
                     .setParameter("username", username);
-            
+
             UsuarioAplicacion usuario = query.getSingleResult();
-            
+
             return usuario;
         } catch (NoResultException ex) {
-        	return null;
+            return null;
         } catch (PersistenceException ex) {
-        	log.error("PersistenceException buscando usuario", ex);
-        	throw new BusinessException(MensajeErrorEnum.EXCEPTION_SEARCH_USER_BY_USERNAME);
+            log.error("PersistenceException buscando usuario", ex);
+            throw new BusinessException(MensajeErrorEnum.EXCEPTION_SEARCH_USER_BY_USERNAME);
         }
     }
 

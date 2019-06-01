@@ -7,7 +7,7 @@ import org.primefaces.context.RequestContext;
 
 public class RequestContextProducer {
 
-	@Produces
+    @Produces
     @RequestScoped
     public RequestContext getRequestContext() {
         RequestContext requestContext = RequestContext.getCurrentInstance();
@@ -16,5 +16,5 @@ public class RequestContextProducer {
         }
         return requestContext;
     }
-	
+
 }

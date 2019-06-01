@@ -18,12 +18,9 @@ import com.ocpsoft.pretty.faces.annotation.URLMapping;
 @URLMapping(id = "logout", pattern = "/app/logout", viewId = "/faces/logout.xhtml")
 public class LogoutController implements Serializable {
     
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1023751459740273971L;
+    private static final long serialVersionUID = -1023751459740273971L;
 	
-	@Inject
+    @Inject
     private FacesUtils facesUtils;
     
     public LogoutController() {
