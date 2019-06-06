@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/WEB-INF/facelets/templates/templateDefault.xhtml">
+        <ui:define name="title">
+            #{i18n.historico_title_page}
+        </ui:define>
+
+        <ui:define name="content">
+
+            <h:form id="formManageHistorico">
+                
+                <div class="ui-g ui-g-nopad" style="display: flex; align-items: center">
+                    <div class="ui-g-4 ui-g-nopad" style="display: flex; align-items: center">
+                        <div class="ui-g-4">
+                            <p:outputLabel value="#{i18n.historico_form_fecha_desde}:" for="fechaDesde" />
+                        </div>
+                        <div class="ui-g-8">
+                            <p:calendar id="fechaDesde"
+                                        value="#{historicoController.fechaIni}" styleClass="anchoInputCalendar"
+                                        showOn="button" locale="es"
+                                        placeholder="#{i18n.historico_placeholder_fecha_desde}"
+                                        readonlyInput="true" navigator="false"
+                                        pattern="yyyy-MM-dd HH:mm:ss" required="true"
+                                        requiredMessage="#{i18n.historico_mensaje_error_fecha_desde_requerida}" />
+                        </div>
+                    </div>
+                    <div class="ui-g-4 ui-g-nopad" style="display: flex; align-items: center">
+                        <div class="ui-g-4">
+                            <p:outputLabel value="#{i18n.historico_form_fecha_hasta}:" for="fechaHasta" />
+                        </div>
+                        <div class="ui-g-8">
+                            <p:calendar id="fechaHasta"
+                                        value="#{historicoController.fechaFin}" styleClass="anchoInputCalendar"
+                                        showOn="button" locale="es"
+                                        placeholder="#{i18n.historico_placeholder_fecha_hasta}"
+                                        readonlyInput="true" navigator="false"
+                                        pattern="yyyy-MM-dd HH:mm:ss" required="true"
+                                        requiredMessage="#{i18n.historico_mensaje_error_fecha_hasta_requerida}" />
+                        </div>
+                    </div>
+                    <div class="ui-g-4 ui-g-nopad">
+                        <p:commandButton value="#{i18n.historico_btn_buscar_historico}"
+                                         styleClass="navy-button"
+                                         icon="fa fa-search" update="formManageHistorico:tableHistorico" />
+                        <p:commandButton value="#{i18n.historico_btn_ver_grafico}"
+                                         styleClass="navy-button" process="@this"
+                                         actionListener="#{historicoController.createLineModels()}"
+                                         oncomplete="PF('dialogChartLineHistoric').show()"
+                                         icon="fa fa-line-chart" update="formManageHistorico:chartLineHistoric" />
+                    </div>
+                </div>
+
+                <p:dataTable id="tableHistorico" widgetVar="tableHistorico"
+                             value="#{historicoController.lazyDataModelHistorico}"
+                             var="historico" paginator="true" rows="10" paginatorPosition="bottom"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="({startRecord} - {endRecord} #{i18n.de} {totalRecords})"
+                             rowsPerPageTemplate="10, 20, 30, 40, 50" selectionMode="single"
+                             lazy="true" rowKey="#{historico.id}"
+                             emptyMessage="#{i18n.datatable_sin_registros}">
+                    <f:facet name="header">
+                        #{i18n.historico_datatable_title_lista_historico}
+                    </f:facet>
+                    
+                    <p:column headerText="#{i18n.historico_form_fecha_medicion}" style="width: 250px;">
+                        <h:outputText value="#{historico.fechaMedicion}" />
+                    </p:column>
+                    
+                    <p:column headerText="#{i18n.historico_form_valor_medicion}" style="text-align: center;">
+                        <h:outputText value="#{historico.valorMedicion}" />
+                    </p:column>
+                    
+                    <p:column headerText="#{i18n.historico_form_alerta_bradicardia}" style="width: 200px; text-align: center;">
+                        <h:outputText value="#{historico.generoAlertaBradicardia}" />
+                    </p:column>
+                    
+                    <p:column headerText="#{i18n.historico_form_alerta_taquicardia}" style="width: 200px; text-align: center;">
+                        <h:outputText value="#{historico.generoAlertaTaquicardia}" />
+                    </p:column>
+                </p:dataTable>
+                
+                <p:dialog id="dialogChartLineHistoric" 
+                          widgetVar="dialogChartLineHistoric" 
+                          height="600px" width="85%" dynamic="true" modal="true" >
+                    <p:chart id="chartLineHistoric" type="line" model="#{historicoController.lineModelHistorico}" style="height:500px;"/>
+                </p:dialog>
+
+            </h:form>
+
+        </ui:define>
+
+    </ui:composition>
+</html>
+

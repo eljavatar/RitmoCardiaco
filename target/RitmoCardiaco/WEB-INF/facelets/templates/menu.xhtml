@@ -3,11 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" 
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
     
     <ui:composition>
         <h:form id="formMenu">
+            <p:menu style="width: inherit">
+                <p:menuitem value="Inicio" url="../app/index" icon="fa fa-home" />
+                <p:menuitem value="Histórico" url="../app/historico" icon="fa fa-bar-chart" />
+            </p:menu>
 <!--             <p:menu model="#{menuAplicacion}" style="width: inherit" /> -->
         </h:form>
     </ui:composition>

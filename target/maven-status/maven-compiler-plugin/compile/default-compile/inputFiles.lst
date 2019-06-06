@@ -6,9 +6,11 @@ C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main
 C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\webservice\ApplicationConfig.java
 C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\exceptions\IException.java
 C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\view\utils\FacesMessagesUtil.java
+C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\view\utils\PaginationDto.java
 C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\logical\manager\PersonaManagerEjb.java
 C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\annotations\UserInfo.java
 C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\webservice\RitmoCardiacoControl.java
+C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\view\utils\ResponsePaginationDto.java
 C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\utils\RelationalOperatorJpaEnum.java
 C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\logfactory\LoggerImpl.java
 C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\utils\QueryUtils.java
@@ -21,6 +23,7 @@ C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main
 C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\view\controller\InicioController.java
 C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\model\HistoricoRitmo.java
 C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\model\SexoEnum.java
+C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\view\controller\HistoricoController.java
 C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\utils\Constantes.java
 C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\exceptions\CustomExceptionHandler.java
 C:\Users\Andres\Documents\NetBeansProjects\DesignPatterns\RitmoCardiaco\src\main\java\com\eljavatar\udistrital\ritmocardiaco\exceptions\CustomExceptionHandlerFactory.java
